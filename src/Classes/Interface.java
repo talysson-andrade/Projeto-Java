@@ -1,7 +1,8 @@
 package Classes;
 import java.util.Scanner;
 
-public class Screen {
+public class Interface {
+
 
     public void Menu(){
         System.out.println("Digite a opção desejada: ");
@@ -19,6 +20,12 @@ public class Screen {
         else if (resposta == 1) {
             CadastrarItem();
         }
+        else if(resposta == 2){
+
+            CadastrarProduto();
+        } else if (resposta == 3) {
+
+        }
 
     }
 
@@ -29,20 +36,33 @@ public class Screen {
 
     public int InputUsuario(){
         Scanner scan = new Scanner(System.in);
-        int input = scan.nextInt();
-        return input;
+        return scan.nextInt();
     }
     public String InputUsuarioTexto(){
         Scanner scan = new Scanner(System.in);
-        String input = scan.next();
-        return input;
+        return scan.next();
     }
 
     public void CadastrarItem(){
         System.out.println("Insira o nome do item: ");
         String nome = InputUsuarioTexto();
-        Item item = new Item(nome, "fdfsd");
+        System.out.println("Insira uma descrição para o item: ");
+        String desc = InputUsuarioTexto();
+        Item item = new Item(nome, desc);
 
-        System.out.println("nome do item: "+ item.getNome());
+        System.out.println("Item cadastrado com sucesso");
     }
+
+    public void CadastrarProduto(){
+        System.out.println("Insira o nome do produto: ");
+        String nome = InputUsuarioTexto();
+        System.out.println("Insira uma descrição para o produto: ");
+        String desc = InputUsuarioTexto();
+        Produto produto = new Produto(nome, desc);
+
+        System.out.println("Produto cadastrado com sucesso");
+    }
+
+
+
 }

@@ -1,10 +1,11 @@
+import Classes.Interface;
 import Classes.Item;
-import Classes.Screen;
+import Classes.Interface;
 
 public class Main {
 
     public static void main(String[] args) {
-        Screen screen = new Screen();
+        Interface screen = new Interface();
 
         screen.Menu();
 
