@@ -1,4 +1,4 @@
-package Classes;
+
 import java.util.Scanner;
 
 public class Interface {
@@ -11,6 +11,8 @@ public class Interface {
         System.out.println("3. Adicionar Item ao Estoque ");
         System.out.println("4. Retirar Item do Estoque ");
         System.out.println("5. Procurar Item no Estoque");
+        System.out.println("6. Capacidade de Produção");
+        
 
         int resposta = InputUsuario();
 

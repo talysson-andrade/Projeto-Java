@@ -1,5 +1,3 @@
-package Classes;
-
 public class Item {
     private String nome;
     private String desc;

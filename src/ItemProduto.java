@@ -1,5 +1,3 @@
-package Classes;
-
 public class ItemProduto{
     private Item item;
     private int quantidade;

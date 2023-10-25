@@ -1,5 +1,3 @@
-package Classes;
-
 public class Produto {
     private String nome;
     private String cod;
