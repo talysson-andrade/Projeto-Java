@@ -3,17 +3,37 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DBconection {
-    public static void main(String[] args) {
-        String url = "jdbc:mysql://localhost:3306/seu_banco_de_dados";
-        String usuario = "seu_usuario";
-        String senha = "sua_senha";
-        
+    private static final String URL = "jdbc:derby:/caminho/para/seu/banco/de/dados";
+    private static final String USUARIO = "seuUsuario";
+    private static final String SENHA = "suaSenha";
+
+    public static Connection conectar() {
         try {
-            Connection conexao = DriverManager.getConnection(url, usuario, senha);
-            System.out.println("Conexão bem-sucedida!");
-            // Você pode usar 'conexao' para executar consultas e interagir com o banco de dados.
+            Connection conexao = DriverManager.getConnection(URL, USUARIO, SENHA);
+            System.out.println("Conexão bem-sucedida com o banco de dados Derby.");
+            return conexao;
         } catch (SQLException e) {
-            System.err.println("Erro na conexão com o banco de dados: " + e.getMessage());
+            System.err.println("Erro ao conectar ao banco de dados Derby: " + e.getMessage());
+            return null;
         }
+    }
+
+    public static void fecharConexao(Connection conexao) {
+        if (conexao != null) {
+            try {
+                conexao.close();
+                System.out.println("Conexão com o banco de dados Derby fechada.");
+            } catch (SQLException e) {
+                System.err.println("Erro ao fechar a conexão com o banco de dados: " + e.getMessage());
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        Connection conexao = conectar();
+
+        // Você pode usar a conexão para executar consultas SQL aqui
+
+        fecharConexao(conexao);
     }
 }
