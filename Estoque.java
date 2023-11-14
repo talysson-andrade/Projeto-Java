@@ -44,4 +44,25 @@ public class Estoque {
         String codigoItem = item.getCodigo();
         return quantidadeItens.getOrDefault(codigoItem, 0);
     }
+
+    public int contarCapacidadeProducao(Produto produto){
+        for(Map.Entry<Item, Integer> entry : produto.getMapaDeItens().entrySet()){
+            Item item = entry.getKey();
+            int quantidadeNecessaria = entry.getValue();
+
+            if(!quantidadeItens.containsKey(item.getCodigo())  || quantidadeItens.get(item.getCodigo())< quantidadeNecessaria){
+                return 0;
+            }
+        }
+        int capacidadeProducao = Integer.MAX_VALUE;
+        for(Map.Entry<Item, Integer> entry : produto.getMapaDeItens().entrySet()){
+            Item item = entry.getKey();
+            int quantidadeNecessaria = entry.getValue();
+            int quantidadeDisponivel = quantidadeItens.get(item.getCodigo());
+            
+            int capacidadeItem = quantidadeDisponivel / quantidadeNecessaria;
+            capacidadeProducao = Math.min(capacidadeProducao, capacidadeItem);
+        }
+        return capacidadeProducao;
+    }
 }

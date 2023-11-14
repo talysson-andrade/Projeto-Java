@@ -122,6 +122,15 @@ public class Interface {
         }
     }
     private void contarCapacidadeProducao(Scanner scan){
+        System.out.println("Digite o código do Produto:");
+        String codigoProduto = scan.nextLine();
+
+        Produto produto = produtosCadastrados.encotrarProdutoPorCodigo(codigoProduto);
+        if(produto != null){
+            System.out.println("Capacidade de Produção para "+ produto.getNome()+ ": " + estoque.contarCapacidadeProducao(produto));
+        } else{
+            System.out.println("Produto não encontrado.");
+        }
         
     }
 

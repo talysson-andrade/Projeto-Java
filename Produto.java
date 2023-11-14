@@ -18,6 +18,9 @@ public class Produto {
     public String getNome(){
         return nome;
     }
+    public Map<Item, Integer> getMapaDeItens(){
+        return itens;
+    }
     
     public void adicionarItem(Item item, int quantidade){
         itens.put(item, itens.getOrDefault(item, 0)+ quantidade);
