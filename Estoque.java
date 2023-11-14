@@ -1,7 +1,9 @@
 import java.util.HashMap;
 import java.util.Map;
+import java.io.Serializable;
 
-public class Estoque {
+public class Estoque implements Serializable{
+    private static final long serialVersionUID = 1L;
     private Map<String, Integer> quantidadeItens;
 
     public Estoque(){
@@ -46,22 +48,25 @@ public class Estoque {
     }
 
     public int contarCapacidadeProducao(Produto produto){
-        for(Map.Entry<Item, Integer> entry : produto.getMapaDeItens().entrySet()){
+        for(Map.Entry<Item, Integer> entry : produto.getMapaDeItens().entrySet()){ //Percorre todos os Itens do Produto
+            /*Verifica se todos os itens necessários para o produto estão presentes no estoque */
             Item item = entry.getKey();
             int quantidadeNecessaria = entry.getValue();
 
             if(!quantidadeItens.containsKey(item.getCodigo())  || quantidadeItens.get(item.getCodigo())< quantidadeNecessaria){
+                //Se algum item não está presente ou se a quantidade é insuficiente, a capacidade é 0
                 return 0;
             }
         }
-        int capacidadeProducao = Integer.MAX_VALUE;
-        for(Map.Entry<Item, Integer> entry : produto.getMapaDeItens().entrySet()){
+        int capacidadeProducao = Integer.MAX_VALUE; // coloca um valor alto
+
+        for(Map.Entry<Item, Integer> entry : produto.getMapaDeItens().entrySet()){ //Percorre todos os Itens do Produto
             Item item = entry.getKey();
             int quantidadeNecessaria = entry.getValue();
             int quantidadeDisponivel = quantidadeItens.get(item.getCodigo());
             
             int capacidadeItem = quantidadeDisponivel / quantidadeNecessaria;
-            capacidadeProducao = Math.min(capacidadeProducao, capacidadeItem);
+            capacidadeProducao = Math.min(capacidadeProducao, capacidadeItem); // Compara os dois valores e retorna o menor
         }
         return capacidadeProducao;
     }
