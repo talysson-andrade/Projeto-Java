@@ -7,9 +7,25 @@ public class Interface {
     private ProdutosCadastrados produtosCadastrados;
 
     public Interface(){
-        this.estoque = new Estoque();
-        this.itensCadastrados = new ItensCadastrados();
-        this.produtosCadastrados = new ProdutosCadastrados();
+        Estoque estoque = SalvarCarregar.carregarEstoque("estoque.txt");
+        ItensCadastrados itens = SalvarCarregar.carregarItens("itens.txt");
+        ProdutosCadastrados produtos = SalvarCarregar.carregarProdutos("produtos.txt");
+
+        if(estoque != null){
+            this.estoque = estoque;
+        }else {
+            this.estoque = new Estoque();
+        }
+        if(itens != null){
+            this.itensCadastrados = itens;
+        }else {
+            this.itensCadastrados = new ItensCadastrados();
+        }
+        if(produtos != null){
+            this.produtosCadastrados = produtos;
+        }else {
+            this.produtosCadastrados = new ProdutosCadastrados();
+        }
 
     }
 
@@ -50,6 +66,9 @@ public class Interface {
             relacionarItemAoProduto(scan);
             break;
             case 0:
+                SalvarCarregar.salvarEstoque(estoque, "estoque.txt");
+                SalvarCarregar.salvarItens(this.itensCadastrados, "itens.txt");
+                SalvarCarregar.salvarProdutos(this.produtosCadastrados, "produtos.txt");
             System.out.println("Saindo do sistema...");
             System.exit(0);
             default:
@@ -157,6 +176,4 @@ public class Interface {
         }
         
     }
-
-    
 }

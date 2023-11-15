@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.io.Serializable;
 
@@ -9,6 +10,8 @@ public class Estoque implements Serializable{
     public Estoque(){
         this.quantidadeItens = new HashMap<>();
     }
+
+
 
     public void adicionarItemAoEstoque(Item item, int quantidade){
         if(item != null){
@@ -43,7 +46,7 @@ public class Estoque implements Serializable{
     }
 
     public int quantidadeItemNoEstoque(Item item){
-        String codigoItem = item.getCodigo();
+       String codigoItem = item.getCodigo();
         return quantidadeItens.getOrDefault(codigoItem, 0);
     }
 
