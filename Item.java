@@ -2,7 +2,6 @@ import java.io.Serializable;
 
 public class Item implements Serializable{
     private static final long serialVersionUID = 1L;
-    private static int contadorItens = 1;
     private String codigo;
     private String descricao;
     private String nome;
@@ -14,7 +13,11 @@ public class Item implements Serializable{
     }
 
     private String gerarCodigo(){
-        return String.format("%03d", contadorItens++);        
+        int codigo = 1;
+        while(ItensCadastrados.encontrarItemPorCodigo(String.format("%03d", codigo)) != null){
+            ++codigo;
+        }
+        return String.format("%03d", codigo);
     }
 
     public String getCodigo(){

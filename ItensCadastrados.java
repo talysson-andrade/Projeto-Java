@@ -14,7 +14,7 @@ public class ItensCadastrados implements Serializable {
         return listaDeItens;
     }
 
-    public Item encotrarItemPorCodigo(String codigo){
+    public static Item encontrarItemPorCodigo(String codigo){
          
         for(Item item : listaDeItens ){
             if (item.getCodigo().equals(codigo)){
@@ -23,4 +23,5 @@ public class ItensCadastrados implements Serializable {
         }
         return null;
     }
+
 }

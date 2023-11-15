@@ -7,9 +7,9 @@ public class Interface {
     private ProdutosCadastrados produtosCadastrados;
 
     public Interface(){
-        Estoque estoque = SalvarCarregar.carregarEstoque("estoque.txt");
-        ItensCadastrados itens = SalvarCarregar.carregarItens("itens.txt");
-        ProdutosCadastrados produtos = SalvarCarregar.carregarProdutos("produtos.txt");
+        Estoque estoque = SalvarCarregar.carregarEstoque("Dados/estoque.txt");
+        ItensCadastrados itens = SalvarCarregar.carregarItens("Dados/itens.txt");
+        ProdutosCadastrados produtos = SalvarCarregar.carregarProdutos("Dados/produtos.txt");
 
         if(estoque != null){
             this.estoque = estoque;
@@ -66,9 +66,9 @@ public class Interface {
             relacionarItemAoProduto(scan);
             break;
             case 0:
-                SalvarCarregar.salvarEstoque(estoque, "estoque.txt");
-                SalvarCarregar.salvarItens(this.itensCadastrados, "itens.txt");
-                SalvarCarregar.salvarProdutos(this.produtosCadastrados, "produtos.txt");
+                SalvarCarregar.salvarEstoque(estoque, "Dados/estoque.txt");
+                SalvarCarregar.salvarItens(this.itensCadastrados, "Dados/itens.txt");
+                SalvarCarregar.salvarProdutos(this.produtosCadastrados, "Dados/produtos.txt");
             System.out.println("Saindo do sistema...");
             System.exit(0);
             default:
@@ -108,22 +108,26 @@ public class Interface {
         System.out.println("Digite o código do item:");
         String codigoItem = scan.nextLine();
 
-        Item item = itensCadastrados.encotrarItemPorCodigo(codigoItem);
+        Item item = itensCadastrados.encontrarItemPorCodigo(codigoItem);
 
-        
-        System.out.println("Digite a quantidade a ser adicionada ao estoque: ");
-        int quantidade = scan.nextInt();
-        scan.nextLine();
+        if (item != null) {
+            System.out.println(item.getNome());
+            System.out.println("Digite a quantidade a ser adicionada ao estoque: ");
+            int quantidade = scan.nextInt();
+            scan.nextLine();
 
-        estoque.adicionarItemAoEstoque(item, quantidade);
-        System.out.println(estoque.quantidadeItemNoEstoque(item) +" "+ item.getNome()+ " adicionados ao estoque");
-        
+            estoque.adicionarItemAoEstoque(item, quantidade);
+            System.out.println(quantidade + " " + item.getNome() + " adicionados ao estoque");
+            System.out.println(estoque.quantidadeItemNoEstoque(item)+" " + item.getNome()+" presentes no estoque");
+        } else {
+            System.out.println("Item sem cadastrado.");
+        }
         
     }
     private void retirarItemDoEstoque(Scanner scan){
         System.out.println("Digite o código do item:");
         String codigoItem = scan.nextLine();
-        Item item = itensCadastrados.encotrarItemPorCodigo(codigoItem);
+        Item item = itensCadastrados.encontrarItemPorCodigo(codigoItem);
         System.out.println("Digite a quantidade a ser retirada do estoque:");
         int quantidade = scan.nextInt();
         estoque.retirarItemDoEstoque(item, quantidade);       
@@ -132,7 +136,7 @@ public class Interface {
         System.out.println("Digite o código do item:");
         String codigoItem = scan.nextLine();
 
-        Item item = itensCadastrados.encotrarItemPorCodigo(codigoItem);
+        Item item = itensCadastrados.encontrarItemPorCodigo(codigoItem);
         if(item != null){
             System.out.println(item.getCodigo() + " " + item.getNome() + " " + estoque.quantidadeItemNoEstoque(item));
         }
@@ -163,7 +167,7 @@ public class Interface {
             System.out.println("Digite o código do Item:");
             String codigoItem = scan.nextLine();
 
-            Item item = itensCadastrados.encotrarItemPorCodigo(codigoItem);
+            Item item = itensCadastrados.encontrarItemPorCodigo(codigoItem);
             if( item != null){
                 System.out.println("Insira a quantidade do Item:");
                 int quantidade = scan.nextInt();

@@ -1,3 +1,5 @@
+import org.jetbrains.annotations.NotNull;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -9,7 +11,7 @@ public class SalvarCarregar {
 
     public static void salvarEstoque(Estoque estoque, String arquivo){
         try{
-            FileOutputStream f = new FileOutputStream(new File("estoque.txt"));
+            FileOutputStream f = new FileOutputStream(new File("Dados/estoque.txt"));
             ObjectOutputStream o = new ObjectOutputStream(f);
 
             o.writeObject(estoque);
@@ -17,12 +19,12 @@ public class SalvarCarregar {
             o.close();
 
         }catch(IOException e){
-            System.out.println("Erro ao salvar os dados" + e.getMessage());
+
         }
     }
-    public static void salvarItens(ItensCadastrados itens, String arquivo){
+    public static void salvarItens(@NotNull ItensCadastrados itens, String arquivo){
         try{
-            FileOutputStream f = new FileOutputStream(new File("itens.txt"));
+            FileOutputStream f = new FileOutputStream(new File("Dados/itens.txt"));
             ObjectOutputStream o = new ObjectOutputStream(f);
 
             for(Item item : itens.obterListaDeItens() ){
@@ -34,12 +36,12 @@ public class SalvarCarregar {
             o.close();
 
         }catch(IOException e){
-            System.out.println("Erro ao salvar os dados" + e.getMessage());
+
         }
     }
     public static void salvarProdutos(ProdutosCadastrados produtos, String arquivo){
         try{
-            FileOutputStream f = new FileOutputStream(new File("produtos.txt"));
+            FileOutputStream f = new FileOutputStream(new File("Dados/produtos.txt"));
             ObjectOutputStream o = new ObjectOutputStream(f);
 
             o.writeObject(produtos);
@@ -48,13 +50,13 @@ public class SalvarCarregar {
             f.close();
 
         }catch(IOException e){
-            System.out.println("Erro ao salvar os dados" + e.getMessage());
+
         }
     }
 
     public static Estoque carregarEstoque(String arquivo){
         try {
-            FileInputStream fi = new FileInputStream(new File("estoque.txt"));
+            FileInputStream fi = new FileInputStream(new File("Dados/estoque.txt"));
 
             ObjectInputStream oi = new ObjectInputStream(fi);
 
@@ -65,62 +67,68 @@ public class SalvarCarregar {
             fi.close();
             return estoque;
         }catch (FileNotFoundException e) {
-            System.out.println("File not found");
+
             return null;
         }catch (ClassNotFoundException e) {
             e.printStackTrace();
             return null;
         }catch(IOException e){
-        System.out.println("Erro ao salvar os dados" + e.getMessage());
+
         return null;
         }
     }
 
     public static ItensCadastrados carregarItens(String arquivo){
         try {
-            FileInputStream fi = new FileInputStream(new File("itens.txt"));
+            FileInputStream fi = new FileInputStream(new File("Dados/itens.txt"));
 
             ObjectInputStream oi = new ObjectInputStream(fi);
 
             ItensCadastrados itens= new ItensCadastrados();
 
-
-
-            Item item = (Item) oi.readObject();
+            Item  item = (Item) oi.readObject();
             itens.adicionarItem(item);
-
-
+            while(item != null) {
+                item = (Item) oi.readObject();
+                itens.adicionarItem(item);
+            }
+            oi.close();
             return itens;
         }catch (FileNotFoundException e) {
-            System.out.println("File not found");
+
             return null;
         }catch (ClassNotFoundException e) {
             e.printStackTrace();
             return null;
         }catch(IOException e){
-            System.out.println("Erro ao salvar os dados" + e.getMessage());
+
             return null;
         }
     }
     public static ProdutosCadastrados carregarProdutos(String arquivo){
         try {
-            FileInputStream fi = new FileInputStream(new File("produtos.txt"));
+            FileInputStream fi = new FileInputStream(new File("Dados/produtos.txt"));
 
             ObjectInputStream oi = new ObjectInputStream(fi);
 
             ProdutosCadastrados produtos = (ProdutosCadastrados) oi.readObject();
 
+            Produto  produto = (Produto) oi.readObject();
+            produtos.adicionarProduto(produto);
+            while(produto != null) {
+                produto = (Produto) oi.readObject();
+                produtos.adicionarProduto(produto);
+            }
             oi.close();
-            fi.close();
             return produtos;
         }catch (FileNotFoundException e) {
-            System.out.println("File not found");
+
             return null;
         }catch (ClassNotFoundException e) {
             e.printStackTrace();
             return null;
         }catch(IOException e){
-            System.out.println("Erro ao salvar os dados" + e.getMessage());
+
             return null;
         }
     }
