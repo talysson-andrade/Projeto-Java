@@ -6,11 +6,13 @@ public class Produto implements Serializable {
     private static final long serialVersionUID = 1L;
     private String codigo;
     private String nome;
+    private String descricao;
     private Map<Item, Integer> itens;
 
-    public Produto(String codigo, String nome){
+    public Produto(String codigo, String nome, String descricao){
         this.codigo = codigo;
         this.nome = nome;
+        this.descricao = descricao;
         this.itens = new HashMap<>();
     }
 
@@ -20,9 +22,11 @@ public class Produto implements Serializable {
     public String getNome(){
         return nome;
     }
+    public String getDescricao(){return descricao;}
     public Map<Item, Integer> getMapaDeItens(){
         return itens;
     }
+
     
     public void adicionarItem(Item item, int quantidade){
         itens.put(item, itens.getOrDefault(item, 0)+ quantidade);

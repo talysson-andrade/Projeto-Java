@@ -34,7 +34,7 @@ public class Interface {
         System.out.println("2. Cadastrar Item");
         System.out.println("3. Adicionar Item ao Estoque");
         System.out.println("4. Retirar Item do Estoque");
-        System.out.println("5. Procurar Item no Estoque");
+        System.out.println("5. Procurar Item Cadastrado");
         System.out.println("6. Contar Capacidade de Produão de um Produto");
         System.out.println("7. Relacionar Item ao Produto");
         System.out.println("0. Sair");
@@ -57,7 +57,7 @@ public class Interface {
             retirarItemDoEstoque(scan);
             break;
             case 5:
-            procurarItemNoEstoque(scan);
+            procurarItemCadastrado(scan);
             break;
             case 6:
             contarCapacidadeProducao(scan);
@@ -81,14 +81,22 @@ public class Interface {
     private void cadastrarProduto(Scanner scan){
         System.out.println("Digite o código do produto: ");
         String codigoProduto = scan.nextLine();
+        if (ProdutosCadastrados.encotrarProdutoPorCodigo(codigoProduto) == null)
+        {
 
-        System.out.print("Digite o nome do produto: ");
-        String nomeProduto = scan.nextLine();
+            System.out.print("Digite o nome do produto: ");
+            String nomeProduto = scan.nextLine();
 
-        Produto produto = new Produto(codigoProduto, nomeProduto);
-        produtosCadastrados.adicionarProduto(produto);
+            System.out.print("Digite a descrição do produto: ");
+            String descricao = scan.nextLine();
 
-        System.out.println(produto.getNome() + " " + "Cadastrado com o código: " + produto.getCodigo());
+            Produto produto = new Produto(codigoProduto, nomeProduto, descricao);
+            produtosCadastrados.adicionarProduto(produto);
+
+            System.out.println(produto.getNome() + " " + "Cadastrado com o código: " + produto.getCodigo());
+        }else {
+            System.out.println("Já existe um produto cadastrado com este código. Tente novamente com um novo código. ");
+        }
     }
 
     private void cadastrarItem(Scanner scan){
@@ -128,20 +136,24 @@ public class Interface {
         System.out.println("Digite o código do item:");
         String codigoItem = scan.nextLine();
         Item item = itensCadastrados.encontrarItemPorCodigo(codigoItem);
+        System.out.println(item.getNome());
         System.out.println("Digite a quantidade a ser retirada do estoque:");
         int quantidade = scan.nextInt();
         estoque.retirarItemDoEstoque(item, quantidade);       
     }
-    private void procurarItemNoEstoque(Scanner scan){
+    private void procurarItemCadastrado(Scanner scan){
         System.out.println("Digite o código do item:");
         String codigoItem = scan.nextLine();
 
         Item item = itensCadastrados.encontrarItemPorCodigo(codigoItem);
         if(item != null){
-            System.out.println(item.getCodigo() + " " + item.getNome() + " " + estoque.quantidadeItemNoEstoque(item));
+            System.out.println("Código: "+item.getCodigo());
+            System.out.println("Nome: "+item.getNome());
+            System.out.println("Descrição: "+item.getDescricao());
+            System.out.println("Quantidade disponível em estoque: "+ estoque.quantidadeItemNoEstoque(item));
         }
         else{
-            System.out.println("Item não encontrado no estoque");
+            System.out.println("Item não cadastrado.");
         }
     }
     private void contarCapacidadeProducao(Scanner scan){
@@ -150,7 +162,11 @@ public class Interface {
 
         Produto produto = produtosCadastrados.encotrarProdutoPorCodigo(codigoProduto);
         if(produto != null){
-            System.out.println("Capacidade de Produção para "+ produto.getNome()+ ": " + estoque.contarCapacidadeProducao(produto));
+            if(!produto.getMapaDeItens().isEmpty()) {
+                System.out.println("Capacidade de Produção para " + produto.getNome() + ": " + estoque.contarCapacidadeProducao(produto));
+            } else{
+                System.out.println("Produto sem itens relacionados.");
+            }
         } else{
             System.out.println("Produto não encontrado.");
         }

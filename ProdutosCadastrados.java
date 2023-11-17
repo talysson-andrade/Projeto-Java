@@ -14,7 +14,7 @@ public class ProdutosCadastrados implements Serializable {
         return listaDeProdutos;
     }
 
-    public Produto encotrarProdutoPorCodigo(String codigo){
+    public static Produto encotrarProdutoPorCodigo(String codigo){
          
         for(Produto produto : listaDeProdutos ){
             if (produto.getCodigo().equals(codigo)){

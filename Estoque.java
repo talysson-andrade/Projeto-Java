@@ -33,7 +33,7 @@ public class Estoque implements Serializable{
             int quantidadeAtual = quantidadeItemNoEstoque(item);
             if(quantidadeAtual >= quantidade){
                 quantidadeItens.put(codigoItem, quantidadeAtual - quantidade);
-                System.out.println("Item retirado do estoque com sucesso!");
+                System.out.println(quantidade + " " + item.getNome() +" retirado(s) do estoque com sucesso!");
                 System.out.println("Quantidade restante no estoque: "+ quantidadeItens.get(codigoItem));
 
             }else{

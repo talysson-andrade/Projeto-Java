@@ -1,4 +1,3 @@
-import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -22,7 +21,7 @@ public class SalvarCarregar {
 
         }
     }
-    public static void salvarItens(@NotNull ItensCadastrados itens, String arquivo){
+    public static void salvarItens(ItensCadastrados itens, String arquivo){
         try{
             FileOutputStream f = new FileOutputStream(new File("Dados/itens.txt"));
             ObjectOutputStream o = new ObjectOutputStream(f);
@@ -44,10 +43,13 @@ public class SalvarCarregar {
             FileOutputStream f = new FileOutputStream(new File("Dados/produtos.txt"));
             ObjectOutputStream o = new ObjectOutputStream(f);
 
-            o.writeObject(produtos);
+            for(Produto produto : produtos.obterListaDeProdutos() ){
+
+                o.writeObject(produto);
+            }
+
 
             o.close();
-            f.close();
 
         }catch(IOException e){
 
@@ -111,9 +113,9 @@ public class SalvarCarregar {
 
             ObjectInputStream oi = new ObjectInputStream(fi);
 
-            ProdutosCadastrados produtos = (ProdutosCadastrados) oi.readObject();
+            ProdutosCadastrados produtos= new ProdutosCadastrados();
 
-            Produto  produto = (Produto) oi.readObject();
+            Produto produto = (Produto) oi.readObject();
             produtos.adicionarProduto(produto);
             while(produto != null) {
                 produto = (Produto) oi.readObject();
