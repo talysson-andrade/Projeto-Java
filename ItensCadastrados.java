@@ -24,4 +24,11 @@ public class ItensCadastrados implements Serializable {
         return null;
     }
 
+    public void listarItensCadastrados(){
+        for (Item item: listaDeItens
+             ) {
+            System.out.println(item.getCodigo()+"    "+ item.getNome());
+        }
+    }
+
 }

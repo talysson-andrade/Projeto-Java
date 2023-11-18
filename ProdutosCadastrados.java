@@ -14,7 +14,7 @@ public class ProdutosCadastrados implements Serializable {
         return listaDeProdutos;
     }
 
-    public static Produto encotrarProdutoPorCodigo(String codigo){
+    public static Produto encontrarProdutoPorCodigo(String codigo){
          
         for(Produto produto : listaDeProdutos ){
             if (produto.getCodigo().equals(codigo)){
@@ -22,5 +22,11 @@ public class ProdutosCadastrados implements Serializable {
             }
         }
         return null;
+    }
+
+    public void listarProdutosCadastrados(){
+        for(Produto produto : listaDeProdutos){
+            System.out.println(produto.getCodigo() + "      "+ produto.getNome());
+        }
     }
 }

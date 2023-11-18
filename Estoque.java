@@ -73,4 +73,13 @@ public class Estoque implements Serializable{
         }
         return capacidadeProducao;
     }
+
+    public void listarEstoque(){
+        for(Map.Entry<String, Integer> entry : quantidadeItens.entrySet()){
+            Item item = ItensCadastrados.encontrarItemPorCodigo(entry.getKey());
+            int quantidade = entry.getValue();
+
+            System.out.println(item.getCodigo() + "    "+ item.getNome()+ "      "+quantidade);
+        }
+    }
 }

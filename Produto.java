@@ -46,4 +46,12 @@ public class Produto implements Serializable {
             System.out.println("Item não encontrado.");
         }
     }
+
+    public void listarItens(){
+        for(Map.Entry<Item, Integer> entry : itens.entrySet()){ //Percorre todos os Itens do Produto
+            Item item = entry.getKey();
+            int quantidade = entry.getValue();
+            System.out.println(item.getCodigo()+"    "+ item.getNome()+ "     "+quantidade);
+             }
+    }
 }
