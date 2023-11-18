@@ -35,7 +35,7 @@ public class Interface {
         System.out.println("3. Adicionar Item ao Estoque");
         System.out.println("4. Retirar Item do Estoque");
         System.out.println("5. Procurar Item");
-        System.out.println("6. Contar Capacidade de Produão de um Produto");
+        System.out.println("6. Contar Capacidade de Produção de um Produto");
         System.out.println("7. Relacionar Item ao Produto");
         System.out.println("8. Procurar Produto");
         System.out.println("9. Listar Itens Cadastrados");

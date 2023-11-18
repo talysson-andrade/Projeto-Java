@@ -6,7 +6,7 @@ public class Item implements Serializable{
     private String descricao;
     private String nome;
 
-    public Item(String nome, String decricao){
+    public Item(String nome, String descricao){
         this.codigo = gerarCodigo();
         this.descricao = descricao;
         this.nome = nome;
