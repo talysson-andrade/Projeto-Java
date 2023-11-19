@@ -30,6 +30,8 @@ public class Interface {
     }
 
     public void exibirMenu(){
+        System.out.println();
+        System.out.println("...........................................................");
         System.out.println("1. Cadastrar Produto");
         System.out.println("2. Cadastrar Item");
         System.out.println("3. Adicionar Item ao Estoque");

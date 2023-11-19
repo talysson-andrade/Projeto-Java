@@ -25,8 +25,10 @@ public class ProdutosCadastrados implements Serializable {
     }
 
     public void listarProdutosCadastrados(){
+        System.out.println("Produtos Cadastrados: ");
+        System.out.format(" Código      Nome                           %n");
         for(Produto produto : listaDeProdutos){
-            System.out.println(produto.getCodigo() + "      "+ produto.getNome());
+            System.out.format(" %-8s    %-30s %n",produto.getCodigo(), produto.getNome());
         }
     }
 }

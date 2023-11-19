@@ -48,10 +48,12 @@ public class Produto implements Serializable {
     }
 
     public void listarItens(){
+        System.out.format(" Cód    Nome                                          Un %n");
         for(Map.Entry<Item, Integer> entry : itens.entrySet()){ //Percorre todos os Itens do Produto
             Item item = entry.getKey();
             int quantidade = entry.getValue();
-            System.out.println(item.getCodigo()+"    "+ item.getNome()+ "     "+quantidade);
+            System.out.format(" %-3s    %-45s %-2d %n",item.getCodigo(),item.getNome(),quantidade);
+
              }
     }
 }

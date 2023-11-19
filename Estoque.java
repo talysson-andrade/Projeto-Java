@@ -75,11 +75,13 @@ public class Estoque implements Serializable{
     }
 
     public void listarEstoque(){
+        System.out.println("Estoque: ");
+        System.out.format(" Cód    Nome                                          Un %n");
         for(Map.Entry<String, Integer> entry : quantidadeItens.entrySet()){
             Item item = ItensCadastrados.encontrarItemPorCodigo(entry.getKey());
             int quantidade = entry.getValue();
+            System.out.format(" %-3s    %-45s %-2d %n",item.getCodigo(),item.getNome(),quantidade);
 
-            System.out.println(item.getCodigo() + "    "+ item.getNome()+ "      "+quantidade);
         }
     }
 }

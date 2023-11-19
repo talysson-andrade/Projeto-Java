@@ -9,11 +9,11 @@ public class
         int escolha;
         do{
             menu.exibirMenu();
-            System.out.println("Digite a operação desejada: ");
             escolha = scanner.nextInt();
             scanner.nextLine();
 
             menu.realizarOperacao(escolha);
+
         }while (escolha != 0);
     }
 }
